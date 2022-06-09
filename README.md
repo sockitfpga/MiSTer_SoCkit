@@ -16,6 +16,10 @@ See old_firmware/ folder for ModernHackers port (old firmware/framework).
 
 Lee esta [guía](Portando_a_SoCkit.md).
 
+Plantilla de Core con los cambios necesarios para Sockit: https://github.com/sockitfpga/Template_SoCkit
+
 # Porting cores to SoCkit (EN)
 
 Check this [commit](https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd990858f4c1b4fee2c) changes.
+
+Core template with needed changes for Sockit: https://github.com/sockitfpga/Template_SoCkit

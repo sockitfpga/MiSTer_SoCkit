@@ -49,7 +49,7 @@ https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd9
 
   
 
-En los siguientes pasos puedes tomar los ficheros indicados de https://github.com/sockitfpga/Minimig-AGA_SoCkit/tree/MiSTer/sys
+En los siguientes pasos puedes tomar los ficheros indicados del core Template https://github.com/sockitfpga/Template_SoCkit/tree/master/sys
 
 * Añadir los siguientes ficheros en la carpeta sys/
 
