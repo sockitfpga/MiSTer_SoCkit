@@ -1,17 +1,21 @@
 # Linux script to build a MiSTer SDcard for Arrow SoCkit FPGA
 
-adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
+Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
-* Execute script to build the MiSTer SD
+* Execute the script MiSTer-sd-installer-linux.sh to build the MiSTer SD
 
-* Copy MiSTer.ini to SD card
+* Copy MiSTer.ini to the root folder of SD card
 
-* Copy the rbf cores to SD card (see template core mycore.rbf)
+* Copy the rbf cores to SD card (like template core mycore.rbf)
 
-See old_firmware folder for ModernHackers port (works with old firmware/framework).
+See old_firmware/ folder for ModernHackers port (old firmware/framework).
 
 
 
-# Porting cores to SoCkit
+# Portando cores a SoCkit (ES)
 
-Check this [commit](https://github.com/sockitfpga/Template_SoCkit/commit/009bbd914571ac9890ded74e07e7f29e375cb7c5) changes.
+Lee esta [guía](Portando_a_SoCkit.md).
+
+# Porting cores to SoCkit (EN)
+
+Check this [commit](https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd990858f4c1b4fee2c) changes.
