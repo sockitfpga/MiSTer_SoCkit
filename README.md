@@ -15,19 +15,24 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 # SoCkit buttons / leds
 
 KEY 0 = OSD   button
+
 KEY 1 = USER  button
+
 KEY 4 = RESET button
 
 LED 0 = USER led
+
 LED 1 = HDD led
+
 LED 2 = POWER led
+
 LED 3 = LOCKED led
 
 
 
 # SoCkit HSMC GPIO addon assignments
 
-See this document: [SoCkit pinout assignments.md](SoCkit pinout assignments.md)
+Read the [HSMC GPIO pinout assignments.md document](HSMC GPIO pinout assignments.md).
 
 
 
