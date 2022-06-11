@@ -32,7 +32,7 @@ LED 3 = LOCKED led
 
 # SoCkit HSMC GPIO addon assignments
 
-Read the [HSMC GPIO pinout assignments.md document](HSMC GPIO pinout assignments.md).
+Read the [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
 
 
 
