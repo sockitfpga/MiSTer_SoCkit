@@ -38,8 +38,8 @@ Read the [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
 
 # Porting cores to SoCkit
 
-Check this [commit](https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd990858f4c1b4fee2c) changes.
+Check this [COMMIT](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes.
 
-This [guide](Portando_a_SoCkit.md) is also available in Spanish.
+This [guide](Portando_a_SoCkit.md) is also available in Spanish (necesita actualización a la nueva Template).
 
 Core template with needed changes for Sockit: https://github.com/sockitfpga/Template_SoCkit
