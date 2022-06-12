@@ -12,21 +12,41 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 
 
-# SoCkit buttons / leds
+# SoCkit switches / buttons / leds
 
-KEY 0 = OSD   button
+**Switches:** 
 
-KEY 1 = USER  button
+* Default position is all switches pointing towards outside the board
+  * 0 means switch position towards outside of the board
+  * 1 means switch position towards inside of the board
 
-KEY 4 = RESET button
+- SW0: Audio pins output selection
+  - 0 Audio Sigma-Delta and SPDIF pins output 
+  - 1 I2S output though the  sigma delta and SPDIF audio pins 
+- SW1: 
+  - 0  MIDI I2S input enabled. All User IO pins enabled for input. 
+  - 1  three User IO pins are disabled as inputs.
+- SW2: Not used.
+- SW3: Switch has no effect in SoCkit. Internally is wired to 0 in the cores as it is necessary for VGA output mode.
+  - SW3=1 is used in DE10-nano for MiSTer dual SDRAM mode and disables functions of analog IO board (VGA, SD card, Sigma/Delta audio, SPDIF audio, Leds)
 
-LED 0 = USER led
+**Keys:**
 
-LED 1 = HDD led
+- KEY 0 = OSD   button
+- KEY 1 = USER  button
 
-LED 2 = POWER led
+- KEY 4 = RESET button
 
-LED 3 = LOCKED led
+**Leds:**
+
+- LED 0 = USER led
+
+- LED 1 = HDD led
+
+- LED 2 = POWER led
+
+- LED 3 = LOCKED led
+
 
 
 
