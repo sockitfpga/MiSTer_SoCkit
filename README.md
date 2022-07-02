@@ -2,7 +2,7 @@
 
 Find here information about converting your SoCkit FPGA board into a MiSTer compatible platform with the latest firmware and framework.
 
-Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thanks them for his previous work on porting the MiSTer framework and cores to SoCkit. 
+Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thank them for his awesome previous work on porting the MiSTer framework and cores to SoCkit. 
 
 The SoCKit Development Kit presents a robust hardware design platform built around the Altera Cyclone V System-on-Chip (SoC) FPGA, which integrates an ARM-based hard processor system (HPS) consisting of processor, peripherals and memory interfaces tied seamlessly with a 110K Logic Elements. The SoCKit development board includes hardware such as high-speed DDR3 memory, video and audio capabilities, Ethernet networking, and much more.
 
@@ -13,8 +13,9 @@ The SoCkit port leverages all built-in hardware capabilities of the board:
 * VGA 24 bit analog video output
 * Audio CODEC with line-in, line-out, and mic input
 
+Main difference with the DE10-nano is that it does not include an HDMI video output and that it is required to buy an additional HSMC-GPIO adapter to attach SDRAM [compatible MiSTer modules](http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/). If you do not have HMSC-GPIO addon board, you can only run those cores that do not require SDRAM, for example Genesis.
 
-Main difference with the DE10-nano is that it does not includes an HDMI video output and that it requires to buy an additional HSMC-GPIO adapter to attach SDRAM compatible MiSTer modules. If you do not have HMSC-GPPIO addon board, you can run those cores that do not reque SDRAM, for example Genesis.
+Arrow SoCKit port of MiSTer scales original video resolution to a standard VGA resolution (usually 1280x720p60), so you don't need to look for some ancient low Hz monitor (you will have to enable scaler mode in MiSTer.ini).
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
@@ -25,8 +26,6 @@ All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositor
 
 
 HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))![HTG_001_800-hsmc-gpio](img/P0033_GPIO.jpg)
-
-Arrow SoCKit port of MiSTer scales original video resolution to a standard VGA resolution (usually 1280x720p60), so you don't need to look for some ancient low HZ monitor (you will have to enable scaler mode in MiSTer.ini).
 
 ## How does it work?
 
