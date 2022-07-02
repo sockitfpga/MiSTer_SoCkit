@@ -66,7 +66,7 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 ### **4. Download the wished SoCkit compatible cores and copy to the SD card partition**
 
-Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries.
+Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries.   If you don't find here the SoCkit port of a wished MiSTer core see the Porting Cores section below to easily port yourself.
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
@@ -124,19 +124,23 @@ For example try this template core [mycore.rbf](mycore.rbf)
 
 
 
-#### List of cores working with and without (Cyclone V)  SDRAM expansion (ported by ModernHackers) [might not work with the latest MiSTer firmware]:
+#### List of cores working with and without SDRAM expansion
+
+This list is based on the old framework ports by ModernHackers so they might not work with the latest MiSTer firmware.    If you don't find here the SoCkit port of a wished MiSTer core see the Porting Cores section below to easily port yourself.
 
 ![](./img/Sockit-Mister-cores.png)
 
 
 
-## Porting cores to SoCkit
+## Porting MiSTer Cores to SoCkit
 
-Check this [COMMIT](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes.    This [guide](Portando_a_SoCkit.md) is available in Spanish .
+Check this [Commit](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes (new files (green) and modified files (orange)).    
 
-Core template with all the latest changes needed for Sockit: https://github.com/sockitfpga/Template_SoCkit
+A guide is available in Spanish (see below).
 
-New files (green) and changed files (orange):
+[Template core](https://github.com/sockitfpga/Template_SoCkit) contains all the latest changes needed for Sockit ports.
+
+
 
 ![port_files](img/port_files.png)
 
@@ -144,7 +148,7 @@ New files (green) and changed files (orange):
 
 ## Guia para portar cores de MiSTer a SoCkit
 
-*  [Guía de portado de cores MiSTer a SoCkit](Portando_a_SoCkit.md).
+*  [Guía de portado de cores MiSTer a SoCkit](Portando_a_SoCkit.md)
 
   
 
@@ -184,7 +188,7 @@ New files (green) and changed files (orange):
 
   
 
-### ModernHackers useful links regarding the old MiSTer port:
+### ModernHackers useful links regarding the old MiSTer port
 
 * Main MiSTer port site https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki 
 * Mister SDRAM expansion http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
