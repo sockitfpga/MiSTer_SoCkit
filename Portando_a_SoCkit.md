@@ -4,7 +4,7 @@
 
 ## Ejemplo de commit con los cambios realizados para portar el core de Minimig de MiSTer de DE10-nano a SoCkit:
 
-https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd990858f4c1b4fee2c
+https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7
 
 
 

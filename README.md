@@ -114,7 +114,7 @@ For example try this template core [mycore.rbf](mycore.rbf)
 
 ## SoCkit HSMC GPIO addon assignments
 
-* [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
+* [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md)
 
 
 
@@ -150,9 +150,7 @@ A guide is available in Spanish (see below).
 
 *  [Guía de portado de cores MiSTer a SoCkit](Portando_a_SoCkit.md)
 
-  
-
-## Pasos en GitHub para portar un core
+####   Pasos en GitHub para portar un core
 
 - Busco el core a portar en  https://github.com/orgs/MiSTer-devel/repositories 
 
