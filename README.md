@@ -6,7 +6,7 @@ Some of the information below is taken from [ModernHackers](https://github.com/M
 
 
 
-Arrow SoCKit is a rich hardware to run MiSTer cores. Without HSMC-GPIO adapter you cannot attach SDRAM modules, so it is is better to invest into. If you do not have HMSC-GPPIO addon board, you can run those Cores that not requiring SDRAM, for Example Genesis.
+Arrow SoCKit FPGA is a rich hardware to run MiSTer cores. Without HSMC-GPIO adapter you cannot attach SDRAM modules, so it is is better to invest into. If you do not have HMSC-GPPIO addon board, you can run those cores that not requiring SDRAM, for example Genesis.
 
 This port leverages all built-in hardware capabilities of the board:
 
@@ -16,15 +16,13 @@ This port leverages all built-in hardware capabilities of the board:
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
-![sockit](sockit-16567848438722.jpg)
+![sockit](img/sockit.jpg)
 
 ![sockit-descriptions.jpg](img/sockit-descriptions.jpg)
 
 
 
 HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))![HTG_001_800-hsmc-gpio](img/P0033_GPIO.jpg)
-
-Arrow SoCKit is a large FPGA, big systems can be created. It's also possible to add support from ARM side. For example TZX tape format can be parsed on ARM and then send to FPGA. Firmware is not limited by code size or available RAM. It'e even possible to emulate some parts of system on ARM which is not available in FPGA (so-called hybrid emulator).
 
 Arrow SoCKit port of MiSTer scales original video resolution to a standard VGA resolution (usually 1280x720p60), so you don't need to look for some ancient low HZ monitor (you will have to enable scaler mode in MiSTer.ini).
 
@@ -68,7 +66,7 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 ### **4. Download the wished SoCkit compatible cores and copy to the SD card partition**
 
-Find the latest binaries of the codes in https://github.com/sockitfpga/SoCKit_binaries.
+Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries.
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
@@ -96,14 +94,14 @@ For example try this template core [mycore.rbf](mycore.rbf)
 
 **Keys:**
 
-- KEY 0 = OSD   button
-- KEY 1 = USER  button
+- KEY 0 = OSD   button  (brings OSD to screen)
+- KEY 1 = USER  button (usually is the own core's reset button)
 
-- KEY 4 = RESET button
+- KEY 4 = RESET button (FPGA reset brings menu.rbf again to screen)
 
 **Leds:**
 
--  available in SpanishLED 0 = USER led
+-  LED 0 = USER led
 
 - LED 1 = HDD led
 
@@ -122,11 +120,11 @@ For example try this template core [mycore.rbf](mycore.rbf)
 
 ## Using MiSTer SDRAM modules
 
-Read ModernHackers blog: http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
+* Read ModernHackers blog: http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
 
 
 
-#### List of cores working with and without**MiSTer Cores including VIP versions under porting to Arrow SoCKit FPGA Board** (Cyclone V)  SDRAM expansion (ported by ModernHackers) [might not work with the latest MiSTer firmware]:
+#### List of cores working with and without (Cyclone V)  SDRAM expansion (ported by ModernHackers) [might not work with the latest MiSTer firmware]:
 
 ![](./img/Sockit-Mister-cores.png)
 
@@ -136,7 +134,7 @@ Read ModernHackers blog: http://modernhackers.com/128mb-sdram-board-on-de10-stan
 
 Check this [COMMIT](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes.    This [guide](Portando_a_SoCkit.md) is available in Spanish .
 
-Core template with needed changes for Sockit: https://github.com/sockitfpga/Template_SoCkit
+Core template with all the latest changes needed for Sockit: https://github.com/sockitfpga/Template_SoCkit
 
 New files (green) and changed files (orange):
 
@@ -186,7 +184,7 @@ New files (green) and changed files (orange):
 
   
 
-### ModernHackers useful links regarding the MiSTer port:
+### ModernHackers useful links regarding the old MiSTer port:
 
 * Main MiSTer port site https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki 
 * Mister SDRAM expansion http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
