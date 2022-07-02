@@ -1,16 +1,78 @@
-# SoCkit MiSTer
+# SoCkit FPGA MiSTer compatible platform
 
-## Linux script to build a MiSTer SDcard for Arrow SoCkit FPGA
+Find here information about converting your SoCkit FPGA board into a MiSTer compatible platform with the latest firmware and framework.
+
+Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thanks them for his previous work on porting the MiSTer framework and cores to SoCkit. 
+
+
+
+Arrow SoCKit is a rich hardware to run MiSTer cores. Without HSMC-GPIO adapter you cannot attach SDRAM modules, so it is is better to invest into. If you do not have HMSC-GPPIO addon board, you can run those Cores that not requiring SDRAM, for Example Genesis.
+
+This port leverages all built-in hardware capabilities of the board:
+
+* VGA Output
+* Audio output
+* USB Connector
+
+All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
+
+![sockit](sockit-16567848438722.jpg)
+
+![sockit-descriptions.jpg](img/sockit-descriptions.jpg)
+
+
+
+HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))![HTG_001_800-hsmc-gpio](img/P0033_GPIO.jpg)
+
+Arrow SoCKit is a large FPGA, big systems can be created. It's also possible to add support from ARM side. For example TZX tape format can be parsed on ARM and then send to FPGA. Firmware is not limited by code size or available RAM. It'e even possible to emulate some parts of system on ARM which is not available in FPGA (so-called hybrid emulator).
+
+Arrow SoCKit port of MiSTer scales original video resolution to a standard VGA resolution (usually 1280x720p60), so you don't need to look for some ancient low HZ monitor (you will have to enable scaler mode in MiSTer.ini).
+
+## How does it work?
+
+### **1. You need to set the dip switches on the board to the following position:**
+
+You can find the dip switches on the bottom-left corner:
+
+![arrow-sockit-back-pinout](img/board_down.jpg)
+
+Zoomed dip switch status:
+
+![Arrow-SocKit-Linux-Boot](img/linux-boot.png)
+
+If you miss this step your board is not able to boot-up from the SD card and not able to load the menu.rbf file and your video output will be blank.
+
+### **2. Slide Switches to down position**
+
+You need to set to down position all slide switches:
+
+![switches](img/switches.png)
+
+Also notice that for the GPIO addon SDRAM expansion the jumper needs to be in the 3V3 last position.
+
+### **3. Micro SD card for the project**
+
+#### Linux script to build a MiSTer SD card for Arrow SoCkit FPGA (latest MiSTer firmware)
 
 Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
-* Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD
+* Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD card
+* Copy this recommended [MiSTer.ini](MiSTer.ini) to the root folder of SD card
+  * vga scaler mode set in order to see picture on a standard VGA monitor 
+  * modify volumectl if the sound volume is too high and it causes audio distortion for the audio chip on Arrow SoC-Kit.
 
-* Copy MiSTer.ini to the root folder of SD card
-
-* Copy the rbf cores to SD card (like template core mycore.rbf)
 
 See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/framework).
+
+
+
+### **4. Download the wished SoCkit compatible cores and copy to the SD card partition**
+
+Find the latest binaries of the codes in https://github.com/sockitfpga/SoCKit_binaries.
+
+All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
+
+For example try this template core [mycore.rbf](mycore.rbf)
 
 
 
@@ -54,7 +116,19 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 ## SoCkit HSMC GPIO addon assignments
 
-Read the [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
+* [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
+
+
+
+## Using MiSTer SDRAM modules
+
+Read ModernHackers blog: http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
+
+
+
+#### List of cores working with and without**MiSTer Cores including VIP versions under porting to Arrow SoCKit FPGA Board** (Cyclone V)  SDRAM expansion (ported by ModernHackers) [might not work with the latest MiSTer firmware]:
+
+![](./img/Sockit-Mister-cores.png)
 
 
 
@@ -66,7 +140,7 @@ Core template with needed changes for Sockit: https://github.com/sockitfpga/Temp
 
 New files (green) and changed files (orange):
 
-![port_files](port_files.png)
+![port_files](img/port_files.png)
 
 
 
@@ -111,3 +185,12 @@ New files (green) and changed files (orange):
   ```
 
   
+
+### ModernHackers useful links regarding the MiSTer port:
+
+* Main MiSTer port site https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki 
+* Mister SDRAM expansion http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
+
+* Info about the port http://modernhackers.com/porting-mister-to-arrow-sockit-fpga/
+
+* Comparison of ported cores between platforms http://modernhackers.com/mister/
