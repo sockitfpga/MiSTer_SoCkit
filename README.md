@@ -4,15 +4,17 @@ Find here information about converting your SoCkit FPGA board into a MiSTer comp
 
 Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thanks them for his previous work on porting the MiSTer framework and cores to SoCkit. 
 
+The SoCKit Development Kit presents a robust hardware design platform built around the Altera Cyclone V System-on-Chip (SoC) FPGA, which integrates an ARM-based hard processor system (HPS) consisting of processor, peripherals and memory interfaces tied seamlessly with a 110K Logic Elements. The SoCKit development board includes hardware such as high-speed DDR3 memory, video and audio capabilities, Ethernet networking, and much more.
+
+SoCkit board has many similarities with the DE10-nano board and therefore it is compatible with the MiSTer platform. The same applies to the DE10-Standard and DE1-SoC boards all from Terasic.
+
+The SoCkit port leverages all built-in hardware capabilities of the board:
+
+* VGA 24 bit analog video output
+* Audio CODEC with line-in, line-out, and mic input
 
 
-Arrow SoCKit FPGA is a rich hardware to run MiSTer cores. Without HSMC-GPIO adapter you cannot attach SDRAM modules, so it is is better to invest into. If you do not have HMSC-GPPIO addon board, you can run those cores that not requiring SDRAM, for example Genesis.
-
-This port leverages all built-in hardware capabilities of the board:
-
-* VGA Output
-* Audio output
-* USB Connector
+Main difference with the DE10-nano is that it does not includes an HDMI video output and that it requires to buy an additional HSMC-GPIO adapter to attach SDRAM compatible MiSTer modules. If you do not have HMSC-GPPIO addon board, you can run those cores that do not reque SDRAM, for example Genesis.
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
