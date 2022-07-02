@@ -1,4 +1,6 @@
-# Linux script to build a MiSTer SDcard for Arrow SoCkit FPGA
+# SoCkit MiSTer
+
+## Linux script to build a MiSTer SDcard for Arrow SoCkit FPGA
 
 Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
@@ -12,7 +14,7 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 
 
-# SoCkit switches / buttons / leds
+## SoCkit Switches / Buttons / Leds
 
 **Switches:** 
 
@@ -39,7 +41,7 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 **Leds:**
 
-- LED 0 = USER led
+-  available in SpanishLED 0 = USER led
 
 - LED 1 = HDD led
 
@@ -50,16 +52,62 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
 
 
 
-# SoCkit HSMC GPIO addon assignments
+## SoCkit HSMC GPIO addon assignments
 
 Read the [HSMC_GPIO_pinout_assignments.md](HSMC_GPIO_pinout_assignments.md).
 
 
 
-# Porting cores to SoCkit
+## Porting cores to SoCkit
 
-Check this [COMMIT](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes.
-
-This [guide](Portando_a_SoCkit.md) is also available in Spanish (necesita actualización a la nueva Template).
+Check this [COMMIT](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes.    This [guide](Portando_a_SoCkit.md) is available in Spanish .
 
 Core template with needed changes for Sockit: https://github.com/sockitfpga/Template_SoCkit
+
+New files (green) and changed files (orange):
+
+![port_files](port_files.png)
+
+
+
+## Guia para portar cores de MiSTer a SoCkit
+
+*  [Guía de portado de cores MiSTer a SoCkit](Portando_a_SoCkit.md).
+
+  
+
+## Pasos en GitHub para portar un core
+
+- Busco el core a portar en  https://github.com/orgs/MiSTer-devel/repositories 
+
+- Forkeo el core de MiSTer desde la web del repopisotorio en mi GitHub personal
+
+- Clono el fork en mi ordenador: `git clone ssh://url`   
+
+- Borro los rbf de la carpeta releases (dejo el resto de ficheros como rom y mra)
+
+- Porto el core según el último commit de Template. 
+
+  - Personalmente uso el programa Meld para comparar todos los ficheros del core Template versus los del core a portar
+
+- Modifico el archivo README.md del core
+
+- Sintetizo en Quartus y testeo el rbf
+
+- Pongo el rbf en la carpeta releases/  con la fecha de creación (ejemplo core_20220702.rbf)
+
+- Cierro Quartus y limpio los ficheros inútiles que genera Quartus con el script clean.bat / clean.sh
+
+- Subo a GitHub:
+
+  ```sh
+  #antes de subir a GitHub comprobar los archivos que han cambiado y las diferencias
+  git status
+  git diff
+  #subir archivos
+  git add .
+  git commit -am "Sockit port"
+  git push
+  ```
+
+  

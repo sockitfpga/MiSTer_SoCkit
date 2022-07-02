@@ -14,7 +14,7 @@ https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd9
 
   * Opcionalmente bajar el zip del repositorio (CODE > download zip) 
 
-* Borrar del directorio releases/ todos los archivos xxxxxxx.rbf
+* Borrar del directorio releases/ todos los archivos *.rbf  (no borrar el resto de ficheros)
 
 * Editar el **fichero .qsf del directorio principal** del core (por ejemplo Minimig.qsf)
 
@@ -66,25 +66,31 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
 
 * Editar el fichero **sys/sys_top.v** de  la carpeta sys/
 
-  Como ejemplo de los cambios a realizar puedes revisar este [commit](https://github.com/sockitfpga/Minimig-AGA_SoCkit/commit/7d8dc81285769225788ccfd990858f4c1b4fee2c#diff-13d67b12937a9342f615921495251467cd222055cd33b8728f0449fd1b070d1f)
+  Como ejemplo de los cambios a realizar puedes revisar este [commit](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7#diff-13d67b12937a9342f615921495251467cd222055cd33b8728f0449fd1b070d1f)
 
   En resumen solo hay que modificar 3 zonas de este extenso fichero.
 
   * Zona inicial de definición de ports del module sys_top
 
     ```verilog
+    # Modificar los comentarios de cabecera añadiendo lo siguiente
+    //  Arrow SoCKit / DE10-Standard / DE1-SoC MiSTer hardware abstraction module 
+    //  2022 by XXXX https://github.com/XXXX, based on 2019 work by modernhackers
+    //
+    //  MiSTer hardware abstraction module
+    //  (c)2017-2020 Alexey Melnikov
+    //
+    
     # Modificar los siguientes puertos del módulo sys_top
     
     	//////////// VGA ///////////
     # Donde ponga un 5 modificarlo por un 7 ( [5:0]  pasa a  [7:0] )
-    	//DE10-nano board implementation contained 6 / color
-    	//output  [5:0] VGA_R,
-    	//output  [5:0] VGA_G,
-    	//output  [5:0] VGA_B,
     	//SoCkit, DE10-standard, DE1-SoC implementation need to contain 8 bit color otherwise the brightness is low on the DAC
     	output  [7:0] VGA_R,
     	output  [7:0] VGA_G,
     	output  [7:0] VGA_B,
+    	inout         VGA_HS,  // VGA_HS is secondary SD card detect when VGA_EN = 1 (inactive)
+    	output		  VGA_VS,
     # Comentar la línia siguiente 
     	//input      VGA_EN,  // active low
     # Añadir a continuación las nuevas señales para SoCkit
@@ -104,25 +110,28 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
         inout wire    AUD_BCLK,     // Audio CODEC Bit-Stream Clock
         output wire   AUD_XCK,      // Audio CODEC Chip Clock
         output wire   AUD_MUTE,		// Audio CODEC Mute (active low)
-    
     	// I2C Audio CODEC
         inout wire    AUD_I2C_SDAT,     // I2C Data
         output wire   AUD_I2C_SCLK,     // I2C Clock
     
     # Modificar la sección MB SWITCH según lo descrito
     	////////// MB SWITCH ////////
-    	//SoCkit, DE10-standard, DE1-SoC board implementation
     	//input   [3:0] SW,
-    	inout   [3:0] SW,				
+    	//SoCkit, DE10-standard, DE1-SoC board implementation
+    	inout   [3:0] SW,		
     
     # Modificar la sección MB LED según lo descrito
     	////////// MB LED ///////////
     	//output  [7:0] LED
-    	output LED0
+    	//SoCkit, DE10-standard, DE1-SoC board implementation
+    	output LED_0_USER,
+    	output LED_1_HDD,
+    	output LED_2_POWER,
+    	output LED_3_LOCKED,
     ```
-
+  
     
-
+  
     ```verilog
     # Comentar los ports no utilizados 
         //////////// HDMI //////////
@@ -142,15 +151,6 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     	//////////// VGA ///////////
     	//input      VGA_EN,  // active low
     
-    	/////////// AUDIO //////////
-    	// output		  AUDIO_L,
-    	// output		  AUDIO_R,
-    	// output		  AUDIO_SPDIF,
-    
-    	//////////// SDIO ///////////
-    	// inout   [3:0] SDIO_DAT,
-    	// inout         SDIO_CMD,
-    	// output        SDIO_CLK,
     
     	////////// I/O ALT /////////
     	// output        SD_SPI_CS,
@@ -158,9 +158,6 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     	// output        SD_SPI_CLK,
     	// output        SD_SPI_MOSI,
     
-    	// inout         SDCD_SPDIF,
-    	// output        IO_SCL,
-    	// inout         IO_SDA,
     
     	////////// ADC //////////////
     	// output        ADC_SCK,
@@ -168,20 +165,12 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     	// output        ADC_SDI,
     	// output        ADC_CONVST,
     
-    	///////// USER IO ///////////
-    	//inout   [6:0] USER_IO
     ```
-
+  
     Añadir lo siguiente justo después del final de la definición de ports de sys_top  (después de la línea que pone ""**;)**"" aprox. línea 155 )
-
+  
     ```verilog
-    // DE10-Standard / DE1-SoC / Arrow SoCKit VGA mode
-    assign SW[3] = 1'b0;		//necessary for VGA mode
-    
-    // DE10-Standard / DE1-SoC / SoCKit implementation for on-board VGA DAC route - this will be overrided by code to set value to 0
-    wire   VGA_EN;  // active low
-    assign VGA_EN = 1'b0;		//enable VGA mode when VGA_EN is low
-    
+    //SoCkit, DE10-standard, DE1-SoC board implementation
     wire        HDMI_TX_CLK;
     wire        HDMI_TX_DE;
     wire [23:0] HDMI_TX_D;
@@ -200,35 +189,31 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     wire        ADC_SDI;
     wire        ADC_CONVST;
     
-    wire		AUDIO_L;
-    wire		AUDIO_R;
-    wire		AUDIO_SPDIF;
-    
     wire        SD_SPI_CS;
     wire        SD_SPI_MISO;
     wire        SD_SPI_CLK;
     wire        SD_SPI_MOSI;
     
-    wire        SDCD_SPDIF;
-    wire        IO_SCL;
-    wire        IO_SDA;
-    
-    wire   [3:0] SDIO_DAT;
-    wire         SDIO_CMD;
-    wire         SDIO_CLK;
-    
-    wire   [6:0] USER_IO;
-    
     wire   [7:0] LED;
     
-    assign LED0 = LED[0];
+    assign LED_0_USER   = LED[0];
+    assign LED_1_HDD    = LED[2];
+    assign LED_2_POWER  = LED[4];
+    assign LED_3_LOCKED = LED[6];
+    
+    // DE10-Standard / DE1-SoC / SoCKit implementation for on-board VGA DAC route - this will be overrided by code to set value to 0
+    wire   VGA_EN;  // active low
+    assign VGA_EN = 1'b0;		//enable VGA mode when VGA_EN is low
+    
+    // DE10-Standard / DE1-SoC / Arrow SoCKit VGA mode
+    assign SW[3] = 1'b0;		//necessary for VGA mode
     
     ```
-
+  
     
-
+  
   * Zona asignaciones VGA hacia el final del documento (sobre la línia 1410, puede variar según la versión de framework)
-
+  
     ```verilog
     #modificar las siguientes líneas de ejemplo pero solo lo expresamente indicado a continuación
     #donde ponga 6'bZZZZZZ  modificar por  8'bZZZZZZZZ
@@ -236,7 +221,7 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     #donde ponga [15:10] modificar por [15:8]
     #donde ponga [7:2] modificar por [7:0]
     
-    #Ejemplo. Estas líneas del core original de MiSTer
+    #Ejemplo. Estas líneas del core original de MiSTer  (pueden ser diferentes pero solo hay que añadir las Z y modificar los números)
     
     assign VGA_R  = (VGA_EN | SW[3]) ? 6'bZZZZZZ :   (vga_fb | vga_scaler) ? vgas_o[23:18] : vga_o[23:18];
     	assign VGA_G  = (VGA_EN | SW[3]) ? 6'bZZZZZZ :   (vga_fb | vga_scaler) ? vgas_o[15:10] : vga_o[15:10];
@@ -256,11 +241,11 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
     	assign VGA_SYNC_N = 0; 					//VGA DAC additional required pin
     	assign VGA_CLK = HDMI_TX_CLK; 			//has to define a clock to VGA DAC clock otherwise
     ```
-
+  
     
-
+  
   * Zona Audio
-
+  
     ```verilog
     # Añadir las siguientes líneas antes de la sección  User I/O (USB 3.0 connector) situada hacia el final del archivo (sobre la línia 1550, puede variar según la versión de framework)
     
@@ -282,7 +267,7 @@ En los siguientes pasos puedes tomar los ficheros indicados del core Template ht
       .oI2C_SDAT    (AUD_I2C_SDAT         )
     );
     ```
-
+  
     
 
 
