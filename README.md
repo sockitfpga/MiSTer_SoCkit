@@ -156,23 +156,25 @@ A guide is available in Spanish (see below).
 
 - Busco el core a portar en  https://github.com/orgs/MiSTer-devel/repositories 
 
-- Forkeo el core de MiSTer desde la web del repopisotorio en mi GitHub personal
+- Forkeo el core de MiSTer desde la web del repositorio en mi GitHub personal
 
 - Clono el fork en mi ordenador: `git clone ssh://url`   
 
-- Borro los rbf de la carpeta releases (dejo el resto de ficheros como rom y mra)
+- Borro los rbf de la carpeta releases (dejo el resto de ficheros como roms y mras)
 
-- Porto el core según el último commit de Template. 
+- Porto el core según esta [guia](Portando_a_SoCkit.md)
 
-  - Personalmente uso el programa Meld para comparar todos los ficheros del core Template versus los del core a portar
+  - Personalmente uso el programa Meld para comparar / copiar los ficheros indicados anteriormente en verde/naranja del core [Template](https://github.com/sockitfpga/Template_SoCkit) versus los del core a portar.  En Windows también se puede usar un programa llamado Beyond compare.
 
-- Modifico el archivo README.md del core
+- Modifico el archivo README.md del core para indicar que se trata de un port de SoCkit y dar los créditos y enlace al repositorio del creador original
 
-- Sintetizo en Quartus y testeo el rbf
+- Sintetizo el core con la versión  17.0.2 o 17.1 de Quartus Prime Lite edition y testeo el binario rbf generado
 
-- Pongo el rbf en la carpeta releases/  con la fecha de creación (ejemplo core_20220702.rbf)
+  - Bajar Quartus en [Linux](https://www.intel.com/content/www/us/en/software-kit/669440/intel-quartus-prime-lite-edition-design-software-version-17-1-for-linux.html?) o [Windows](https://www.intel.com/content/www/us/en/software-kit/669444/intel-quartus-prime-lite-edition-design-software-version-17-1-for-windows.html)
 
-- Cierro Quartus y limpio los ficheros inútiles que genera Quartus con el script clean.bat / clean.sh
+- Copio el fichero rbf en la carpeta releases/  con la fecha de creación (ejemplo: core_20220702.rbf)
+
+- Cierro Quartus y limpio los ficheros inútiles que genera Quartus con el script clean.bat / [clean.sh](clean.sh)
 
 - Subo a GitHub:
 
