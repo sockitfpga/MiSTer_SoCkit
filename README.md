@@ -56,6 +56,8 @@ Also notice that for the GPIO addon SDRAM expansion the jumper needs to be in th
 Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
 * Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD card
+  * dependencies: 7z `sudo apt install p7zip`
+
 * Copy this recommended [MiSTer.ini](MiSTer.ini) to the root folder of SD card
   * vga scaler mode set in order to see picture on a standard VGA monitor 
   * modify volumectl if the sound volume is too high and it causes audio distortion for the audio chip on Arrow SoC-Kit.
