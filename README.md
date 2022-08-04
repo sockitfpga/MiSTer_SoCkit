@@ -65,6 +65,17 @@ Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
 See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/framework).
 
+#### Windows SD-installer 
+
+*  Download SD-Installer-Win64_MiSTer latest release and follow the how-to instructions
+
+  [SD-Installer-Win64_MiSTer](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer)
+
+* Replace existing archives in the created SD card with this ones:
+  *  [MiSTer](MiSTer) 
+  *  [menu.rbf](menu.rbf) 
+  *  [MiSTer.ini](MiSTer.ini) 
+
 
 
 ### **4. Download the wished SoCkit compatible cores and copy to the SD card partition**
