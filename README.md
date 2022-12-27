@@ -2,7 +2,7 @@
 
 Find here information about converting your SoCkit FPGA board into a MiSTer compatible platform with the latest firmware and framework.
 
-Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thank them for his awesome previous work on porting the MiSTer framework and cores to SoCkit. 
+Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thank them for his awesome previous work back in 2019 on porting the MiSTer framework and cores to SoCkit. 
 
 The SoCKit Development Kit presents a robust hardware design platform built around the Altera Cyclone V System-on-Chip (SoC) FPGA, which integrates an ARM-based hard processor system (HPS) consisting of processor, peripherals and memory interfaces tied seamlessly with a 110K Logic Elements. The SoCKit development board includes hardware such as high-speed DDR3 memory, video and audio capabilities, Ethernet networking, and much more.
 
@@ -55,15 +55,15 @@ Also notice that for the GPIO addon SDRAM expansion the jumper needs to be in th
 
 Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
-* Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD card
+* Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD card (updated to main/menu/linux 20221224)
   * dependencies: 7z `sudo apt install p7zip`
 
 * Copy this recommended [MiSTer.ini](MiSTer.ini) to the root folder of SD card
-  * vga scaler mode set in order to see picture on a standard VGA monitor 
-  * modify volumectl if the sound volume is too high and it causes audio distortion for the audio chip on Arrow SoC-Kit.
+  * vga scaler mode is set in order to see picture on a standard VGA monitor 
+  * modify volumectl if the sound volume is too high and it causes audio distortion for the audio chip on Arrow SoCKit.
 
 
-See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/framework).
+Not needed anymore but just for reference, I include how I ported the old 2019 firmware/framework from ModernHackers in the [old_firmware/](old_firmware/) folder.
 
 #### Windows SD-installer 
 
@@ -76,11 +76,33 @@ See [old_firmware/](old_firmware/) folder for ModernHackers port (old firmware/f
   *  [menu.rbf](menu.rbf) 
   *  [MiSTer.ini](MiSTer.ini) 
 
+### 4. SD folder structure 
 
+Create the following folder structure in the SD card:
 
-### **4. Download the wished SoCkit compatible cores and copy to the SD card partition**
+* _Arcade
+  * place here the mra files
+* _Arcade/cores
+  * place here the Arcade rbf cores
+* _Computer
+  * place here the Computer rbf cores
+* _Console
+  * place here the Console rbf cores
+* _Other
+  * place here the Other rbf cores
+* games
+  * place here each core folder including the roms, vhds and any required files 
 
-Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries.   If you don't find here the SoCkit port of a wished MiSTer core see the Porting Cores section below to easily port yourself.
+* games/mame
+  * place here the Arcade rom files
+
+Other folders are: cheats, docs, Filters, filters_audio, font, Presets, Shadow_Masks. You will find more info about those in the [MiSTer wiki](https://github.com/MiSTer-devel/Wiki_MiSTer/wiki).
+
+### 5. Download the wished SoCkit MiSTer compatible cores and copy them to the SD card partition
+
+Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries and copy them in the corresponding folder (_Arcade/cores, _Computer, _Console, _Other)
+
+If you don't find here the SoCkit port of a wished MiSTer core see the Porting Cores section below to easily port yourself.
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 

@@ -72,9 +72,9 @@ verify_absent_or_directory "${DOWNLOAD_DIRECTORY}" "${MNT_DIRECTORY}"
 
 # TODO(m): Remove hardcoded versions.
 # URLs
-RELEASE_URL='https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer/raw/master/release_20221224.7z'
-RECENT_MISTER_URL='https://github.com/MiSTer-devel/Main_MiSTer/raw/master/releases/MiSTer_20221224'
-RECENT_MENU_MISTER_URL='https://github.com/sockitfpga/Menu_SoCkit/raw/master/releases/menu_20221224.rbf'
+RELEASE_URL='https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer/raw/master/release_20220413.7z'
+RECENT_MISTER_URL='https://github.com/MiSTer-devel/Main_MiSTer/raw/master/releases/MiSTer_20220529'
+RECENT_MENU_MISTER_URL='https://github.com/sockitfpga/Menu_SoCkit/raw/master/releases/menu_20220601.rbf'
 
 # Sanity checks
 if [ -z "${1}" ]; then
