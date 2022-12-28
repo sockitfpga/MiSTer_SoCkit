@@ -71,10 +71,10 @@ Not needed anymore but just for reference, I include how I ported the old 2019 f
 
   [SD-Installer-Win64_MiSTer](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer)
 
-* Replace existing archives in the created SD card with this ones:
-  *  [MiSTer](MiSTer) 
-  *  [menu.rbf](menu.rbf) 
-  *  [MiSTer.ini](MiSTer.ini) 
+* Replace existing archives in the created SD card with this or newer ones:
+  *  [MiSTer](MiSTer) (20221224)
+  *  [menu.rbf](menu.rbf) (20221224)
+  *  [MiSTer.ini](MiSTer.ini) (20221224)
 
 ### 4. SD folder structure 
 
@@ -100,7 +100,9 @@ Other folders are: cheats, docs, Filters, filters_audio, font, Presets, Shadow_M
 
 ### 5. Download the wished SoCkit MiSTer compatible cores and copy them to the SD card partition
 
-Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries and copy them in the corresponding folder (_Arcade/cores, _Computer, _Console, _Other)
+Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries and copy them in the corresponding folder (_Arcade/cores, _Computer, _Console, _Other). 
+
+For Arcades find the mra files in the releases folder of each arcade repository and for the Arcade roms you can use this script  [mame-merged-set-getter.sh](mame-merged-set-getter.sh) on your local machine or check this [link](https://pleasuredome.github.io/pleasuredome/).
 
 If you don't find here the SoCkit port of a wished MiSTer core see the Porting Cores section below to easily port yourself.
 
