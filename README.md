@@ -1,8 +1,16 @@
 # SoCkit FPGA MiSTer compatible platform
 
-Find here information about converting your SoCkit FPGA board into a MiSTer compatible platform with the latest firmware and framework.
+Find below information about converting your SoCkit FPGA board into a MiSTer compatible platform with the latest firmware and framework.
 
-Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thank them for his awesome previous work back in 2019 on porting the MiSTer framework and cores to SoCkit. 
+* Setup SoCkit MiSTer: Set dip switches; Set slide switches; Prepare / update Micro SD card for MiSTer SoCkit; SD folder structure; Download SoCkit MiSTer compatible cores to the SD card
+
+* SoCkit Switches / Buttons / Leds
+
+* SoCkit HSMC GPIO addon assignments
+* Using MiSTer SDRAM modules.   List of cores working with and without SDRAM expansion
+* Porting MiSTer Cores to SoCkit
+
+Some of the information below is taken from [ModernHackers](https://github.com/MiSTer-Arrow-SoCKit/Main_MiSTer/wiki ) so we acknowledge and thank them for his awesome previous 2019 work on porting the MiSTer framework and cores to SoCkit. 
 
 The SoCKit Development Kit presents a robust hardware design platform built around the Altera Cyclone V System-on-Chip (SoC) FPGA, which integrates an ARM-based hard processor system (HPS) consisting of processor, peripherals and memory interfaces tied seamlessly with a 110K Logic Elements. The SoCKit development board includes hardware such as high-speed DDR3 memory, video and audio capabilities, Ethernet networking, and much more.
 
@@ -25,11 +33,11 @@ All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositor
 
 
 
-HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))![HTG_001_800-hsmc-gpio](img/P0033_GPIO.jpg)
+HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))<img src="img/P0033_GPIO.jpg" alt="HTG_001_800-hsmc-gpio" style="zoom:50%;" />
 
-## How does it work?
+## Setup SoCkit MiSTer
 
-### **1. You need to set the dip switches on the board to the following position:**
+### **1. Set the dip switches on the board to the following position**
 
 You can find the dip switches on the bottom-left corner:
 
@@ -41,7 +49,7 @@ Zoomed dip switch status:
 
 If you miss this step your board is not able to boot-up from the SD card and not able to load the menu.rbf file and your video output will be blank.
 
-### **2. Slide Switches to down position**
+### **2. Set the slide switches to down position**
 
 You need to set to down position all slide switches:
 
@@ -49,32 +57,38 @@ You need to set to down position all slide switches:
 
 Also notice that for the GPIO addon SDRAM expansion the jumper needs to be in the 3V3 last position.
 
-### **3. Micro SD card for the project**
+### **3. Prepare / update Micro SD card for MiSTer SoCkit**
 
-#### Linux script to build a MiSTer SD card for Arrow SoCkit FPGA (latest MiSTer firmware)
+#### Linux script to build a MiSTer SD card for Arrow SoCkit FPGA (20221224)
 
 Adapted from https://github.com/michaelshmitty/SD-Installer-macos_MiSTer
 
 * Execute the script [MiSTer-sd-installer-linux.sh](MiSTer-sd-installer-linux.sh) to build the MiSTer SD card (updated to main/menu/linux 20221224)
   * dependencies: 7z `sudo apt install p7zip`
 
-* Copy this recommended [MiSTer.ini](MiSTer.ini) to the root folder of SD card
-  * vga scaler mode is set in order to see picture on a standard VGA monitor 
-  * modify volumectl if the sound volume is too high and it causes audio distortion for the audio chip on Arrow SoCKit.
+* Copy this recommended [MiSTer.ini](MiSTer.ini) to the root folder of SD card. If you copy the original MiSTer.ini make sure to modify at least the following parameters:
+  * vga_scaler=1   is needed to see picture on a standard VGA monitor 
+  * forced_scandoubler=1 is needed for most modern monitors (31 kHz)
 
 
-Not needed anymore but just for reference, I include how I ported the old 2019 firmware/framework from ModernHackers in the [old_firmware/](old_firmware/) folder.
+Just for historical reference [here](old_firmware/) is how I ported the old 2019 firmware/framework from ModernHackers.
 
 #### Windows SD-installer 
 
-*  Download SD-Installer-Win64_MiSTer latest release and follow the how-to instructions
+*  Download [SD-Installer-Win64_MiSTer](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer) latest release and follow the how-to instructions
 
-  [SD-Installer-Win64_MiSTer](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer)
+*  Follow instructions below to update your SD card
 
-* Replace existing archives in the created SD card with this or newer ones:
-  *  [MiSTer](MiSTer) (20221224)
-  *  [menu.rbf](menu.rbf) (20221224)
-  *  [MiSTer.ini](MiSTer.ini) (20221224)
+#### Updating your current MiSTer SD card
+
+Replace existing archives/folders in your existing SD card with this ones:
+
+*  [MiSTer](MiSTer) (20221224) or get the latest release one from [MiSTer-devel](https://github.com/MiSTer-devel/Main_MiSTer/tree/master/releases)
+*  [menu.rbf](menu.rbf) (20221224) (menu is specific for SoCkit so you cannot use the ones from MiSTer-devel)
+*  [MiSTer.ini](MiSTer.ini) (20221224) or get the latest one from [MiSTer-devel](https://raw.githubusercontent.com/MiSTer-devel/Main_MiSTer/master/MiSTer.ini) but don't forget to modify at least the following parameters:
+   * vga_scaler=1   is needed to see picture on a standard VGA monitor 
+   * forced_scandoubler=1 is needed for most modern monitors (31 kHz)
+*  [linux folder from files/linux](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer/raw/master/release_20221224.7z) (20221224) or get the latest release from [MiSTer-devel](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer)
 
 ### 4. SD folder structure 
 
@@ -98,9 +112,9 @@ Create the following folder structure in the SD card:
 
 Other folders are: cheats, docs, Filters, filters_audio, font, Presets, Shadow_Masks. You will find more info about those in the [MiSTer wiki](https://github.com/MiSTer-devel/Wiki_MiSTer/wiki).
 
-### 5. Download the wished SoCkit MiSTer compatible cores and copy them to the SD card partition
+### 5. Download SoCkit MiSTer compatible cores to the SD card
 
-Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries and copy them in the corresponding folder (_Arcade/cores, _Computer, _Console, _Other). 
+Find the latest rbf binaries of the cores in https://github.com/sockitfpga/SoCKit_binaries and copy them in the corresponding folder (_Arcade/cores, _Computer, _Console, _Other). For example try this template core [mycore.rbf](mycore_20221228.rbf)
 
 For Arcades find the mra files in the releases folder of each arcade repository and for the Arcade roms you can use this script  [mame-merged-set-getter.sh](mame-merged-set-getter.sh) on your local machine or check this [link](https://pleasuredome.github.io/pleasuredome/).
 
@@ -108,9 +122,9 @@ If you don't find here the SoCkit port of a wished MiSTer core see the Porting C
 
 All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositories](https://github.com/orgs/sockitfpga/repositories) tagged with `mister` topic
 
-For example try this template core [mycore.rbf](mycore.rbf)
+JOTEGO cores for SoCkit MiSTer platform can be found at [JTBIN](https://github.com/jotego/jtbin/tree/master/sockit)
 
-
+More MiSTer compatible cores can be found at [Noemi's GitHub](https://github.com/noemi-abril) and [Patreon](https://www.patreon.com/noemiabril)
 
 ## SoCkit Switches / Buttons / Leds
 
@@ -158,7 +172,7 @@ For example try this template core [mycore.rbf](mycore.rbf)
 
 ## Using MiSTer SDRAM modules
 
-* Read ModernHackers blog: http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/
+Read [ModernHackers blog](http://modernhackers.com/128mb-sdram-board-on-de10-standard-de1-soc-and-arrow-sockit-fpga-sdram-riser/)
 
 
 
@@ -172,7 +186,7 @@ This list is based on the old framework ports by ModernHackers so they might not
 
 ## Porting MiSTer Cores to SoCkit
 
-Check this [Commit](https://github.com/sockitfpga/Template_SoCkit/commit/c349aa28e03251e3225126e6f79496f1b9eeb9d7) changes (new files (green) and modified files (orange)).    
+Check this [commit](https://github.com/sockitfpga/Template_SoCkit/commit/83e96dc0d1cc5bab2a711235ab325e1511e1ed2a) changes (new files (green) and modified files (orange)).    
 
 A guide is available in Spanish (see below).
 
@@ -187,6 +201,8 @@ A guide is available in Spanish (see below).
 ## Guia para portar cores de MiSTer a SoCkit
 
 *  [Guía de portado de cores MiSTer a SoCkit](Portando_a_SoCkit.md)
+
+La anterior guia sigue vigente pero no está basada en la última template. Para la última template consulta los cambios realizados en este [commit](https://github.com/sockitfpga/Template_SoCkit/commit/83e96dc0d1cc5bab2a711235ab325e1511e1ed2a) (nuevos ficheros en verde y modificados en naranja).    
 
 ####   Pasos en GitHub para portar un core
 
@@ -204,9 +220,7 @@ A guide is available in Spanish (see below).
 
 - Modifico el archivo README.md del core para indicar que se trata de un port de SoCkit y dar los créditos y enlace al repositorio del creador original
 
-- Sintetizo el core con la versión  17.0.2 o 17.1 de Quartus Prime Lite edition y testeo el binario rbf generado
-
-  - Bajar Quartus en [Linux](https://www.intel.com/content/www/us/en/software-kit/669440/intel-quartus-prime-lite-edition-design-software-version-17-1-for-linux.html?) o [Windows](https://www.intel.com/content/www/us/en/software-kit/669444/intel-quartus-prime-lite-edition-design-software-version-17-1-for-windows.html)
+- Sintetizo el core con la versión  17.0.2 o 17.1([Linux](https://www.intel.com/content/www/us/en/software-kit/669440/intel-quartus-prime-lite-edition-design-software-version-17-1-for-linux.html?) o [Windows](https://www.intel.com/content/www/us/en/software-kit/669444/intel-quartus-prime-lite-edition-design-software-version-17-1-for-windows.html)) de Quartus Prime Lite edition y testeo el binario rbf generado
 
 - Copio el fichero rbf en la carpeta releases/  con la fecha de creación (ejemplo: core_20220702.rbf)
 
