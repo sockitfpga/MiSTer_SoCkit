@@ -29,11 +29,15 @@ All ported and tested cores for Arrow SoCKit are listed at [SoCkitfpga repositor
 
 ![sockit](img/sockit.jpg)
 
+![sockit](img/sockit_op.jpg)
+
 ![sockit-descriptions.jpg](img/sockit-descriptions.jpg)
 
 
 
 HSMC-GPIO male addon board (P0033 reference from [Terasic](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=67&No=322&PartNo=2#heading))<img src="img/P0033_GPIO.jpg" alt="HTG_001_800-hsmc-gpio" style="zoom:50%;" />
+
+![sockit](img/P0033_GPIO_op.jpg)
 
 ## Setup SoCkit MiSTer
 
@@ -75,7 +79,7 @@ Just for historical reference [here](old_firmware/) is how I ported the old 2019
 
 #### Windows SD-installer 
 
-*  Download [SD-Installer-Win64_MiSTer](https://github.com/MiSTer-devel/SD-Installer-Win64_MiSTer) latest release and follow the how-to instructions
+*  Download [MiSTer SoCkit](https://github.com/goofyseeker311/MiSTer_SoCkit/tree/main/releases) latest release and follow the how-to instructions
 
 *  Follow instructions below to update your SD card
 
