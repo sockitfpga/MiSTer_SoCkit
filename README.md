@@ -75,7 +75,7 @@ Just for historical reference [here](old_firmware/) is how I ported the old 2019
 
 #### Windows SD-installer 
 
-*  Download [mister sockit](https://github.com/goofyseeker311/MiSTer_SoCkit/tree/main/releases) latest release and follow the how-to instructions
+*  Download [MiSTer SoCkit](https://github.com/goofyseeker311/MiSTer_SoCkit/tree/main/releases) latest release and follow the how-to instructions
 
 *  Follow instructions below to update your SD card
 
